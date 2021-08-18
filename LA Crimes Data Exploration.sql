@@ -5,6 +5,29 @@ Skills used: Joins, Temp Tables, Windows Functions, Aggregate Functions, Creatin
 
 */
  
+ #Reformat VictimDescent column to show full names of descent without abbreviations
+
+SELECT DISTINCT(VictimDescent), COUNT(VictimDescent) AS Total FROM crime_data GROUP BY VictimDescent ORDER BY Total DESC;
+UPDATE crime_data SET VictimDescent = 'Other Asian' WHERE VictimDescent = 'A'; 
+UPDATE crime_data SET VictimDescent = 'Black' WHERE VictimDescent = 'B';
+UPDATE crime_data SET VictimDescent = 'Chinese' WHERE VictimDescent = 'C';
+UPDATE crime_data SET VictimDescent = 'Filipino' WHERE VictimDescent = 'F';
+UPDATE crime_data SET VictimDescent = 'Guamanian' WHERE VictimDescent = 'G';
+UPDATE crime_data SET VictimDescent = 'Hispanic' WHERE VictimDescent = 'H';
+UPDATE crime_data SET VictimDescent = 'Native American' WHERE VictimDescent = 'I';
+UPDATE crime_data SET VictimDescent = 'Japanese' WHERE VictimDescent = 'J';
+UPDATE crime_data SET VictimDescent = 'Korean' WHERE VictimDescent = 'K';
+UPDATE crime_data SET VictimDescent = 'Other' WHERE VictimDescent = 'O';
+UPDATE crime_data SET VictimDescent = 'Pacific Islander' WHERE VictimDescent = 'P';
+UPDATE crime_data SET VictimDescent = 'Samoan' WHERE VictimDescent = 'S';
+UPDATE crime_data SET VictimDescent = 'Hawaiian' WHERE VictimDescent = 'Hawaian';
+UPDATE crime_data SET VictimDescent = 'Vietnamese' WHERE VictimDescent = 'V';
+UPDATE crime_data SET VictimDescent = 'Unknown' WHERE VictimDescent = 'X';
+UPDATE crime_data SET VictimDescent = 'White' WHERE VictimDescent = 'W';
+UPDATE crime_data SET VictimDescent = 'Indian' WHERE VictimDescent = 'Z';
+UPDATE crime_data SET VictimDescent = 'Cambodian' WHERE VictimDescent = 'D';
+UPDATE crime_data SET VictimDescent = 'Laotian' WHERE VictimDescent = 'L';
+
 #Select data that we are going to be starting with
 
 SELECT CrimeCode, MOCodes, VictimAge, VictimSex, AreaID, AreaName, PremiseCode, StatusDescription
