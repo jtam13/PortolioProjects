@@ -30,7 +30,7 @@ UPDATE crime_data SET VictimDescent = 'Laotian' WHERE VictimDescent = 'L';
 
 #Select data that we are going to be starting with
 
-SELECT CrimeCode, MOCodes, VictimAge, VictimSex, AreaID, AreaName, PremiseCode, StatusDescription
+SELECT DRNumber, CrimeCode, VictimAge, VictimSex, VictimDescent, PremiseCode
 FROM crime_data;
 
 #CREATE VIEWS FOR VIOLENT AND NONVIOLENT CRIMES
@@ -94,7 +94,7 @@ ORDER BY CrimeCode, Count;
  
 #Find the types of crimes that happen at all listed locations and see where the most common crimes take place
 
-SELECT PremiseCode, prem.Description, CrimeCode, cri.Description, COUNT(CrimeCode) AS Count
+SELECT PremiseCode, prem.Description AS Premise, CrimeCode, cri.Description AS Crime, COUNT(CrimeCode) AS Count
 FROM crime_data dat
 JOIN premise_codes prem ON prem.Premise_Code = dat.PremiseCode
 JOIN crime_codes cri On cri.Crime_Code = dat.CrimeCode
@@ -178,7 +178,7 @@ ORDER BY PremCount DESC, AreaCount DESC;
 
 #Find the time between when a crime occurs and when a crime is reported
 
-SELECT CrimeCode, Description, DateOccurred, DateReported, DATEDIFF(STR_TO_DATE(DateReported, '%m/%d/%Y'), STR_TO_DATE(DateOccurred, '%m/%d/%Y')) AS Duration
+SELECT DRNumber, CrimeCode, Description, DateOccurred, DateReported, DATEDIFF(STR_TO_DATE(DateReported, '%m/%d/%Y'), STR_TO_DATE(DateOccurred, '%m/%d/%Y')) AS Duration
 FROM crime_data
 JOIN crime_codes ON CrimeCode = Crime_Code;
 
@@ -189,5 +189,10 @@ FROM crime_data
 GROUP BY AreaID
 ORDER BY AvgResponse DESC;
 
+#Find the time, location, and victim description of each crime
 
+SELECT DRNumber, DateOccurred, CrimeCode, Description, Location, AreaID, AreaName, VictimAge, VictimSex, VictimDescent
+FROM crime_data
+JOIN crime_codes ON CrimeCode = Crime_Code
+ORDER BY DateOccurred ASC;
 
